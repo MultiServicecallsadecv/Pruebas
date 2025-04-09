@@ -27,7 +27,11 @@ const server = createServer(app)
 // Configuración de CORS para Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: ['https://meek-lily-d07967.netlify.app', 'http://localhost:3000'], // URL de tu página en Netlify
+    origin: [
+      'http://localhost:5173', // Puerto donde corre tu aplicación React en desarrollo
+      'http://localhost:3000',  // Tu servidor de Socket.IO, si es necesario
+      'https://meek-lily-d07967.netlify.app', // Origen de producción si es necesario
+    ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true,
