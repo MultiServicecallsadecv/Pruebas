@@ -1,0 +1,13 @@
+# Ignorar archivos temporales
+*.log
+*.tmp
+
+# Ignorar la carpeta node_modules (común en proyectos Node.js)
+node_modules/
+
+# Ignorar archivos de configuración del editor
+.vscode/
+*.swp
+
+# Ignorar archivos de entorno
+.env
