@@ -6,6 +6,14 @@ import { createClient } from '@libsql/client'
 import { Server } from 'socket.io'
 import { createServer } from 'node:http'
 
+import cors from 'cors';
+
+// Permitir que el dominio de Hostinguer se conecte
+app.use(cors({
+  origin: 'https://meek-lily-d07967.netlify.app/', // Sustituye con tu dominio de Hostinguer
+  methods: ['GET', 'POST']
+}));
+
 dotenv.config()
 
 const port = process.env.PORT ?? 3000

@@ -14,7 +14,7 @@ const getUsername = async () => {
   return randomUsername
 }
 
-const socket = io({
+const socket = io('https://pruebas-6l0l.onrender.com',{
   auth: {
     username: await getUsername(),
     serverOffset: 0
