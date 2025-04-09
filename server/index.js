@@ -8,17 +8,17 @@ import { createServer } from 'node:http'
 
 import cors from 'cors';
 
-// Permitir que el dominio de Hostinguer se conecte
+dotenv.config()
+
+const port = process.env.PORT ?? 3000
+
+const app = express() // Inicializamos la aplicación 'app' aquí
+// Ahora podemos usar 'app'
 app.use(cors({
   origin: 'https://meek-lily-d07967.netlify.app/', // Sustituye con tu dominio de Hostinguer
   methods: ['GET', 'POST']
 }));
 
-dotenv.config()
-
-const port = process.env.PORT ?? 3000
-
-const app = express()
 const server = createServer(app)
 const io = new Server(server, {
   connectionStateRecovery: {}
@@ -77,14 +77,13 @@ io.on('connection', async (socket) => {
   }
 })
 
-//Aqui ya agarra todas las carpetas
+//Aquí ya agarra todas las carpetas
 app.use(logger('dev'))
 app.use(express.static(process.cwd() + '/client'))
 
 app.get('/', (req, res) => {
   res.sendFile(process.cwd() + '/client/index.html')
 })
-
 
 server.listen(port, () => {
   console.log(`Server running on port ${port}`)
