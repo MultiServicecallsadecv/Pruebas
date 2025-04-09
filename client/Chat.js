@@ -14,12 +14,17 @@ const getUsername = async () => {
   return randomUsername
 }
 
-const socket = io('https://pruebas-6l0l.onrender.com',{
-  auth: {
-    username: await getUsername(),
-    serverOffset: 0
+const socket = io(
+  window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000' // Desarrollo
+    : 'https://pruebas-6l0l.onrender.com', // Producción
+  {
+    auth: {
+      username: await getUsername(),
+      serverOffset: 0
+    }
   }
-})
+);
 
 const form = document.getElementById('form')
 const input = document.getElementById('input')

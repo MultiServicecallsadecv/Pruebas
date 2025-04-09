@@ -16,7 +16,7 @@ const app = express()
 
 // Configuración de CORS para Express
 app.use(cors({
-  origin: 'https://meek-lily-d07967.netlify.app', // URL de tu página en Netlify
+  origin: ['https://meek-lily-d07967.netlify.app', 'http://localhost:3000'], // URL de tu página en Netlify
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }));
@@ -27,7 +27,7 @@ const server = createServer(app)
 // Configuración de CORS para Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: 'https://meek-lily-d07967.netlify.app', // URL de tu página en Netlify
+    origin: ['https://meek-lily-d07967.netlify.app', 'http://localhost:3000'], // URL de tu página en Netlify
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true,
