@@ -12,16 +12,26 @@ dotenv.config()
 
 const port = process.env.PORT ?? 3000
 
-const app = express() // Inicializamos la aplicación 'app' aquí
-// Ahora podemos usar 'app'
+const app = express()
+
+// Configuración de CORS para Express
 app.use(cors({
-  origin: 'https://meek-lily-d07967.netlify.app/', // Sustituye con tu dominio de Hostinguer
-  methods: ['GET', 'POST']
+  origin: 'https://meek-lily-d07967.netlify.app', // URL de tu página en Netlify
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
 }));
 
+// Crear servidor HTTP
 const server = createServer(app)
+
+// Configuración de CORS para Socket.IO
 const io = new Server(server, {
-  connectionStateRecovery: {}
+  cors: {
+    origin: 'https://meek-lily-d07967.netlify.app', // URL de tu página en Netlify
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+  },
 })
 
 const db = createClient({
@@ -77,7 +87,7 @@ io.on('connection', async (socket) => {
   }
 })
 
-//Aquí ya agarra todas las carpetas
+// Aquí ya agarra todas las carpetas
 app.use(logger('dev'))
 app.use(express.static(process.cwd() + '/client'))
 
